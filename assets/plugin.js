@@ -32,7 +32,7 @@ require(['gitbook', 'jQuery'], function(gitbook, $) {
   }
 
   function initializePlugin(config) {
-    pluginConfig = config.code;
+    pluginConfig = config['code-pro'];
   }
 
   function format_code_block(block) {
