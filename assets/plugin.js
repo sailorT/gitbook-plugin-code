@@ -47,9 +47,32 @@ require(['gitbook', 'jQuery'], function(gitbook, $) {
     }
 
     if (lines.length > 1) {
-      console.log(lines);
+
+      // 处理span跨行的case
+      let startTag = '';
+      lines = lines.map((line, i) => {
+        if(startTag) {
+          if(line.indexOf('</span>') > -1) {
+            line = `${startTag}${line}`;
+            startTag = '';
+          } else {
+            line = `${startTag}${line}</span>`;
+          }
+          return line;
+        }
+
+        let startTagReg = /.*(<span.*?>)/g;
+        if(startTagReg.test(line)) {
+          if(RegExp.$1 && line.indexOf('</span>', startTagReg.lastIndex) === -1) {
+            line += '</span>';
+            startTag = RegExp.$1;
+          } 
+        }
+        return line;
+      });
+
+
       lines = lines.map(line => '<span class="code-line">' + line + '</span>');
-      console.log(lines);
       code.html(lines.join('\n'));
     }
 

@@ -1,5 +1,5 @@
 {
-  "name": "gitbook-plugin-code",
+  "name": "gitbook-plugin-code-pro",
   "description": "Gitbook plugin to change style of code blocks",
   "main": "index.js",
   "license": "MIT",
